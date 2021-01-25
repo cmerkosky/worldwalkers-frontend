@@ -1,3 +1,6 @@
+# Worldwalkers - Frontend
+The frontend for 'Worldwalkers', a web version of the classic Canadian board game 'Globetrotters'!
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
