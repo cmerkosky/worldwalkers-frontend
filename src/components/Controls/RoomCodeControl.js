@@ -20,10 +20,6 @@ export default class RoomCodeControl extends React.Component{
                 <FormLabel>Room Code</FormLabel>
                 <FormControl type="text" placeholder="Enter the room code here" readOnly={!canEdit} plaintext={!canEdit} value={roomCode} onChange={this.handleChange}/>
             </FormGroup>
-            // <FormGroup controlId="formPlayerName">
-            //     <FormLabel>Player Name</FormLabel>
-            //     <FormControl type="text" placeholder="Enter your player name here" value={playerName} onChange={this.handleChange} />
-            // </FormGroup>
         )
     }
 }

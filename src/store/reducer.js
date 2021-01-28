@@ -2,7 +2,7 @@ import { Types } from './actions';
 
 export const defaultState = {
   playerName: '',
-  roomCode: '',
+  cachedRoomCode: '',
 };
 
 const store = (state = defaultState, action) => {
@@ -13,13 +13,13 @@ const store = (state = defaultState, action) => {
       return { ...state, playerName };
     }
 
-    case Types.ADD_ROOMCODE: {
-      const roomCode = action.payload;
-      return { ...state, roomCode };
+    case Types.UPDATE_CACHEDROOMCODE: {
+      const cachedRoomCode = action.payload;
+      return { ...state, cachedRoomCode };
     }
 
     case Types.REMOVE_ROOMCODE: {
-      return { ...state, roomCode: '' };
+      return { ...state, cachedRoomCode: '' };
     }
 
     default:

@@ -7,7 +7,7 @@ export const Types = {
     // ADD_PASSWORD: 'ADD_PASSWORD',
     // ADD_OPTIONS: 'ADD_OPTIONS'
     UPDATE_PLAYERNAME: 'update_playername',
-    ADD_ROOMCODE: 'add_roomcode',
+    UPDATE_CACHEDROOMCODE: 'update_cachedroomcode',
     REMOVE_ROOMCODE: 'remove_roomcode'
   };
   
@@ -49,8 +49,8 @@ export const updatePlayerName = playerName => ({
   payload: playerName
 })
 
-export const addRoomCode = roomCode => ({
-  type: Types.ADD_ROOMCODE,
+export const updateCachedRoomCode = roomCode => ({
+  type: Types.UPDATE_CACHEDROOMCODE,
   payload: roomCode
 })
 

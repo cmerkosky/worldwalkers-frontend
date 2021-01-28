@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import axios from 'axios'
 import { Form, FormControl, FormGroup, Button, FormLabel } from 'react-bootstrap';
-import { updatePlayerName } from '../../store/actions'
+import { updatePlayerName, updateCachedRoomCode } from '../../store/actions'
 import { PlayerNameControl, RoomCodeControl } from '../Controls'
 import { API_HOST, API_PORT } from '../../env'
 
@@ -19,11 +19,17 @@ class CreateRoom extends React.Component{
 
 
     componentDidMount(){
-        // this.getNewRoomCode()
-        axios.get(`http://localhost:1984/randomRoomCode`)
-            .then(res => {
-                this.setState({roomCodeObj: res.data, roomCode: this.constructRoomCode(res.data)})
-            })
+        const cachedRoomCode = this.props.cachedRoomCode
+
+        if(cachedRoomCode){
+            this.setState({roomCodeObj: cachedRoomCode, roomCode: this.constructRoomCode(cachedRoomCode)})
+        }
+        else{
+            axios.get(`http://localhost:1984/randomRoomCode`)
+                .then(res => {
+                    this.setState({roomCodeObj: res.data, roomCode: this.constructRoomCode(res.data)})
+                })
+        }
     }
 
     constructRoomCode(responseData){
@@ -34,24 +40,13 @@ class CreateRoom extends React.Component{
         return res.join("")
     }
 
-    getNewRoomCode(){
-        const { roomId } = this.state;
-        if (!roomId){
-            this.setState({roomCode: this.generateNewRoomCode()})
-        }
-        
-    }
-
-    generateNewRoomCode(){
-        return "LondonZurichCalgaryAbuDhabi"
-    }
-
     handleSubmit = event => {
         event.preventDefault()
-        const {roomCode, playerName} =  this.state;
+        const {roomCodeObj, roomCode, playerName} =  this.state;
 
         if(playerName){
             this.props.updatePlayerName(playerName)
+            this.props.updateCachedRoomCode(roomCodeObj)
             this.props.history.push("/room/" + roomCode)
         }
     }
@@ -77,7 +72,15 @@ class CreateRoom extends React.Component{
 
 // Pass in the actions this class will need
 const mapDispatchToProps = {
-    updatePlayerName
+    updatePlayerName,
+    updateCachedRoomCode
 }
 
-export default connect(null, mapDispatchToProps)(CreateRoom)
+// Get the state we'll need
+function mapStateToProps(state) {
+    return{
+        cachedRoomCode: state.cachedRoomCode
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateRoom)
