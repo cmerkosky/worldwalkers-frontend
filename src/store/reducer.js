@@ -2,7 +2,9 @@ import { Types } from './actions';
 
 export const defaultState = {
   playerName: '',
-  cachedRoomCode: '',
+  roomCode: '',
+  roomAction: null,
+  socket: null
 };
 
 const store = (state = defaultState, action) => {
@@ -13,13 +15,32 @@ const store = (state = defaultState, action) => {
       return { ...state, playerName };
     }
 
-    case Types.UPDATE_CACHEDROOMCODE: {
-      const cachedRoomCode = action.payload;
-      return { ...state, cachedRoomCode };
+    case Types.CREATE_WITH_ROOMCODE: {
+      const roomCode = action.payload;
+      return { ...state, roomCode, roomAction: "create" };
+    }
+
+    case Types.JOIN_WITH_ROOMCODE: {
+      const roomCode = action.payload;
+      return { ...state, roomCode, roomAction: "join" };
+    }
+
+
+    case Types.REGISTER_SOCKET: {
+      const socket = action.payload;
+      return { ...state, socket };
+    }
+
+    case Types.UNREGISTER_SOCKET: {
+      const socket = state.socket
+      if(socket){
+        socket.close();
+      }
+      return { ...state, socket: null };
     }
 
     case Types.REMOVE_ROOMCODE: {
-      return { ...state, cachedRoomCode: '' };
+      return { ...state, roomCode: '' };
     }
 
     default:

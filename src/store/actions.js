@@ -1,57 +1,34 @@
 export const Types = {
-    // LOG_IN: 'LOG_IN',
-    // LOG_OUT: 'LOG_OUT',
-    // UPDATE_USERNAME: 'UPDATE_USERNAME',
-    // ADD_ROOMID: 'ADD_ROOMID',
-    // REMOVE_ROOMID: 'REMOVE_ROOMID',
-    // ADD_PASSWORD: 'ADD_PASSWORD',
-    // ADD_OPTIONS: 'ADD_OPTIONS'
     UPDATE_PLAYERNAME: 'update_playername',
-    UPDATE_CACHEDROOMCODE: 'update_cachedroomcode',
+    CREATE_WITH_ROOMCODE: 'create_roomcode',
+    JOIN_WITH_ROOMCODE: 'join_with_roomcode',
+    REGISTER_SOCKET: 'register_socket',
+    UNREGISTER_SOCKET: 'unregister_socket',
     REMOVE_ROOMCODE: 'remove_roomcode'
   };
   
-  // export const logIn = username => ({
-  //   type: Types.LOG_IN,
-  //   payload: username
-  // });
-  
-  // export const logOut = () => ({
-  //   type: Types.LOG_OUT
-  // });
-  
-  // export const updateUsername = username => ({
-  //   type: Types.UPDATE_USERNAME,
-  //   payload: username
-  // });
-  
-  // export const addRoomId = roomId => ({
-  //   type: Types.ADD_ROOMID,
-  //   payload: roomId
-  // });
-  
-  // export const removeRoomId = () => ({
-  //   type: Types.REMOVE_ROOMID
-  // });
-  
-  // export const addPassword = password => ({
-  //   type: Types.ADD_PASSWORD,
-  //   payload: password
-  // });
-  
-  // export const addOptions = options => ({
-  //   type: Types.ADD_OPTIONS,
-  //   payload: options
-  // });
-
 export const updatePlayerName = playerName => ({
   type: Types.UPDATE_PLAYERNAME,
   payload: playerName
 })
 
-export const updateCachedRoomCode = roomCode => ({
-  type: Types.UPDATE_CACHEDROOMCODE,
+export const createWithRoomCode = roomCode => ({
+  type: Types.CREATE_WITH_ROOMCODE,
   payload: roomCode
+})
+
+export const joinWithRoomCode = roomCode => ({
+  type: Types.JOIN_WITH_ROOMCODE,
+  payload: roomCode
+})
+
+export const registerSocket = socket => ({
+  type: Types.REGISTER_SOCKET,
+  payload: socket
+})
+
+export const unregisterSocket = () => ({
+  type: Types.UNREGISTER_SOCKET
 })
 
 export const removeRomeCode = () => ({

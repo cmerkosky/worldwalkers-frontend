@@ -2,9 +2,9 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 // import {Room} from './components';
 import HomePage from './components/Pages/HomePage'
-import JoinRoom from './components/Pages/JoinRoom'
-import CreateRoom from './components/Pages/CreateRoom'
-import Game from './components/Pages/Game'
+import JoinRoomPage from './components/Pages/JoinRoomPage'
+import CreateRoomPage from './components/Pages/CreateRoomPage'
+import GamePage from './components/Pages/GamePage'
 
 const ROUTES = [
     {
@@ -23,20 +23,20 @@ const ROUTES = [
             {
                 path: '/join',
                 key: 'APP_JOIN',
-                exact: true,
-                component: JoinRoom
+                exact: false,
+                component: JoinRoomPage
             },
             {
                 path: '/create',
                 key: 'APP_CREATE',
                 exact: true,
-                component: CreateRoom
+                component: CreateRoomPage
             },
             {
-                path: '/room/:roomCode',
+                path: '/game',
                 key: 'APP_LOBBY',
                 exact: true,
-                component: Game
+                component: GamePage
             }
         ]
     }

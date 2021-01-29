@@ -18,7 +18,15 @@ export default class RoomCodeControl extends React.Component{
         return (
             <FormGroup controlId="formRoomCode">
                 <FormLabel>Room Code</FormLabel>
-                <FormControl type="text" placeholder="Enter the room code here" readOnly={!canEdit} plaintext={!canEdit} value={roomCode} onChange={this.handleChange}/>
+                <FormControl 
+                    type="text" 
+                    placeholder="Enter the room code here" 
+                    readOnly={!canEdit} 
+                    plaintext={!canEdit} 
+                    value={(roomCode)} 
+                    onChange={this.handleChange} 
+                    style={{"textAlign":"center"}}
+                    />
             </FormGroup>
         )
     }

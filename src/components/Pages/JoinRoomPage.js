@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Form, InputGroup, FormControl, Button, Container } from 'react-bootstrap';
-import { updatePlayerName } from '../../store/actions'
+import { Form, Button } from 'react-bootstrap';
+import { updatePlayerName, joinWithRoomCode } from '../../store/actions'
 import { PlayerNameControl, RoomCodeControl } from '../Controls'
 
-class JoinRoom extends React.Component{
+class JoinRoomPage extends React.Component{
     constructor(props){
         super(props)
         this.handlePlayerNameChange = this.handlePlayerNameChange.bind(this);
@@ -12,9 +12,9 @@ class JoinRoom extends React.Component{
         this.state = {roomCode: '', playerName: ''}
     }
 
-    // componentDidMount() {
-    //     this.roomCodeInput.focus()
-    // }
+    componentDidMount() {
+        console.log(this.props.match)
+    }
 
     handlePlayerNameChange(playerName){
         this.setState({playerName})
@@ -30,7 +30,8 @@ class JoinRoom extends React.Component{
 
         if(playerName && roomCode){
             this.props.updatePlayerName(playerName)
-            this.props.history.push("/room/" + roomCode)
+            this.props.joinWithRoomCode(roomCode)
+            this.props.history.push("/game")
         }
     }
 
@@ -39,7 +40,7 @@ class JoinRoom extends React.Component{
         const roomCode = this.state.roomCode
 
         return (
-            <Container fluid>
+            <div>
                 <h2>Enter Room Code</h2>
                 <div>
                     <Form onSubmit={this.handleSubmit}>
@@ -48,14 +49,15 @@ class JoinRoom extends React.Component{
                         <Button variant='primary' type="submit">Join</Button>
                     </Form>
                 </div>
-            </Container>
+            </div>
         )
     }
 }
 
 // Pass in the actions this class will need
 const mapDispatchToProps = {
-    updatePlayerName
+    updatePlayerName,
+    joinWithRoomCode
 }
 
-export default connect(null, mapDispatchToProps)(JoinRoom)
+export default connect(null, mapDispatchToProps)(JoinRoomPage)

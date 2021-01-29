@@ -1,12 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import axios from 'axios'
-import { Form, FormControl, FormGroup, Button, FormLabel } from 'react-bootstrap';
-import { updatePlayerName, updateCachedRoomCode } from '../../store/actions'
+import { Form, Button } from 'react-bootstrap';
+import { updatePlayerName, createWithRoomCode } from '../../store/actions'
 import { PlayerNameControl, RoomCodeControl } from '../Controls'
-import { API_HOST, API_PORT } from '../../env'
 
-class CreateRoom extends React.Component{
+class CreateRoomPage extends React.Component{
     constructor(props){
         super(props)
         this.handlePlayerNameChange = this.handlePlayerNameChange.bind(this);
@@ -19,15 +18,15 @@ class CreateRoom extends React.Component{
 
 
     componentDidMount(){
-        const cachedRoomCode = this.props.cachedRoomCode
+        const roomCode = this.props.roomCode
 
-        if(cachedRoomCode){
-            this.setState({roomCodeObj: cachedRoomCode, roomCode: this.constructRoomCode(cachedRoomCode)})
+        if(roomCode){
+            this.setState({roomCode})
         }
         else{
-            axios.get(`http://localhost:1984/randomRoomCode`)
+            axios.get(`${process.env.REACT_APP_API_BASE_URL}/randomRoomCode`)
                 .then(res => {
-                    this.setState({roomCodeObj: res.data, roomCode: this.constructRoomCode(res.data)})
+                    this.setState({roomCode: res.data.roomCode})
                 })
         }
     }
@@ -42,12 +41,13 @@ class CreateRoom extends React.Component{
 
     handleSubmit = event => {
         event.preventDefault()
-        const {roomCodeObj, roomCode, playerName} =  this.state;
+        const playerName =  this.state.playerName;
+        const roomCode = this.state.roomCode
 
         if(playerName){
             this.props.updatePlayerName(playerName)
-            this.props.updateCachedRoomCode(roomCodeObj)
-            this.props.history.push("/room/" + roomCode)
+            this.props.createWithRoomCode(roomCode)
+            this.props.history.push("/game")
         }
     }
 
@@ -73,14 +73,14 @@ class CreateRoom extends React.Component{
 // Pass in the actions this class will need
 const mapDispatchToProps = {
     updatePlayerName,
-    updateCachedRoomCode
+    createWithRoomCode
 }
 
 // Get the state we'll need
 function mapStateToProps(state) {
     return{
-        cachedRoomCode: state.cachedRoomCode
+        roomCode: state.roomCode
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateRoom)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateRoomPage)

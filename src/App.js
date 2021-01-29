@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 
 import ROUTES, { RenderRoutes } from './routes';
 
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 function App() {

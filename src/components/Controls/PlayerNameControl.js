@@ -17,7 +17,13 @@ export default class PlayerNameInputControl extends React.Component{
         return (
             <FormGroup controlId="formPlayerName">
                 <FormLabel>Player Name</FormLabel>
-                <FormControl type="text" placeholder="Enter your player name here" value={playerName} onChange={this.handleChange} />
+                <FormControl
+                    type="text"
+                    placeholder="Enter your player name here"
+                    value={playerName}
+                    onChange={this.handleChange}
+                    style={{"textAlign":"center"}}
+                    />
             </FormGroup>
         )
     }
